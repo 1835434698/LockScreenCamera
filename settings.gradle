@@ -1,0 +1,3 @@
+rootProject.name='CameraLockScreen'
+include ':app'
+include ':screenlockcamera'
