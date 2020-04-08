@@ -2,6 +2,7 @@ package com.tangzy.screenlockcamera;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -27,7 +28,11 @@ public class MyPhotoWindowManager {
             smallWindow = new PhotoWindowSmallView(context);
             if (smallWindowParams == null) {
                 smallWindowParams = new WindowManager.LayoutParams();
-                smallWindowParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    smallWindowParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                } else {
+                    smallWindowParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+                }
                 smallWindowParams.format = PixelFormat.RGBA_8888;
                 smallWindowParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
